@@ -1,16 +1,91 @@
-# React + Vite
+# Advanced Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully featured Task Manager built using **React**, **Vite**, **React Context**, **useReducer**, **Custom Hooks**, **LocalStorage**, and **react-beautiful-dnd**.  
+Includes a modern UI, Dark/Light theme toggle, drag-and-drop reordering, and clean state management.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+### ✔ Core Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add new tasks
+- Mark tasks as completed
+- Delete tasks
+- Filter tasks (All / Pending / Completed)
+- Reorder tasks using drag-and-drop
+- Persist tasks automatically using LocalStorage
 
-## Expanding the ESLint configuration
+### ✔ Additional React Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Custom Hook:** `useLocalStorage`
+- **Context API + useReducer** for global task state
+- **Performance optimizations** using:
+  - `React.memo`
+  - `useCallback`
+  - `useMemo`
+- Form validation to prevent empty task addition
+
+### ✔ Additional UI Features
+
+- Light / Dark mode toggle
+- Smooth animations on add/remove
+- Fully responsive layout
+- Clean minimal design
+- Accessible buttons and inputs
+
+---
+
+## 🧩 Folder Structure
+
+src/
+├── components/
+│ ├── TaskForm.jsx
+│ ├── TaskList.jsx
+│ ├── TaskItem.jsx
+│ ├── ThemeToggle.jsx
+│ └── FilterButtons.jsx
+│
+├── context/
+│ └── TaskContext.jsx
+│
+├── hooks/
+│ └── useLocalStorage.js
+│
+├── utils/
+│ └── uid.js
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+
+---
+
+## 🧠 Architecture Overview
+
+App.jsx
+├── ThemeToggle
+├── TaskForm
+├── FilterButtons
+└── TaskList
+└── TaskItem (Draggable)
+
+- Global state is managed via **Context API + useReducer**
+- Tasks persist using a **custom useLocalStorage hook**
+- Drag and drop implemented using **react-beautiful-dnd**
+
+---
+
+## 🔌 Getting Started
+
+### 1️⃣ Install dependencies
+
+npm install
+
+### 2️⃣ Start the dev server
+
+npm run dev
+
+### 3️⃣ Build for production
+
+npm run build
