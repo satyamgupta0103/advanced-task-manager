@@ -93,11 +93,11 @@ function TaskList({ filter }) {
                 return (
                   <Draggable key={t.id} draggableId={draggableId} index={idx}>
                     {(provided, snapshot) => {
-                      console.log("Draggable render", {
-                        id: draggableId,
-                        providedKeys: Object.keys(provided || {}),
-                        snapshot,
-                      });
+                      // console.log("Draggable render", {
+                      //   id: draggableId,
+                      //   providedKeys: Object.keys(provided || {}),
+                      //   snapshot,
+                      // });
                       return (
                         <TaskItem
                           task={t}
