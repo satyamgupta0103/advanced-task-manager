@@ -1,0 +1,255 @@
+/* ---------- Theme variables (light default + dark override) ---------- */
+:root {
+  /* light theme (default) */
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #3b82f6;
+  --border: rgba(0, 0, 0, 0.06);
+  --input-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --card: #0f1724;
+  --text: #e6eef8;
+  --muted: #9aa8bf;
+  --accent: #60a5fa;
+  --border: rgba(255, 255, 255, 0.03);
+  --input-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Base / layout ---------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Center app */
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Card container */
+.container {
+  width: 100%;
+  max-width: 760px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ---------- Task form ---------- */
+.task-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.task-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: transparent;
+  color: var(--text);
+  outline: none;
+}
+.task-form input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* Add button */
+.task-form button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 0;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+.task-form button:hover {
+  transform: translateY(-1px);
+  opacity: 0.98;
+}
+
+/* ---------- Tasks list ---------- */
+.task-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Card */
+.task-card {
+  background: transparent;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  color: var(--text);
+}
+.task-card.dragging {
+  transform: scale(1.02);
+}
+
+/* Left side (checkbox + title) */
+.task-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.task-title {
+  font-size: 15px;
+  color: var(--text);
+}
+.task-title.completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* Icon button (delete / toggles) */
+.icon-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--text); /* visible in both themes by default */
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-btn:hover {
+  opacity: 0.92;
+}
+
+/* Make delete in task-card a bit muted but readable */
+.task-card .icon-btn {
+  color: var(--muted);
+}
+.task-card .icon-btn:hover {
+  color: var(--text);
+}
+
+/* Checkbox styling (modern browsers) */
+input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+.filter-btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: transparent;
+  color: var(--text); /* ensure visible in light theme */
+}
+.filter-btn:hover {
+  opacity: 0.95;
+}
+
+/* Active filter style */
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Handle empty-filter placeholders if any */
+.filters .filter-btn:not(:empty) {
+  color: var(--text);
+}
+
+/* ---------- Animations for add/remove ---------- */
+.task-card-enter {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.task-card-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.18s ease;
+}
+.task-card-exit {
+  opacity: 1;
+}
+.task-card-exit-active {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: all 0.18s ease;
+}
+
+/* ---------- Small utilities & responsive ---------- */
+.icon-btn.small {
+  padding: 4px;
+  font-size: 12px;
+}
+.header .icon-btn {
+  font-size: 18px;
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 14px;
+  }
+  h1 {
+    font-size: 18px;
+  }
+}
